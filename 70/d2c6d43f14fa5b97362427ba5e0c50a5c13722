@@ -1,0 +1,20 @@
+packages/views/chat/components/file-changes-summary.tsx
+  h_e18e2c7a96869f 104-105,108,112-115
+packages/views/issues/components/inline-comment-run.tsx
+  h_e18e2c7a96869f 187
+packages/views/issues/components/issue-file-changes.test.tsx
+  h_e18e2c7a96869f 58-63,87,89,107-125,160
+packages/views/issues/components/issue-file-changes.tsx
+  h_e18e2c7a96869f 44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "70d2c6d43f14fa5b97362427ba5e0c50a5c13722",
+  "prompts": {},
+  "humans": {
+    "h_e18e2c7a96869f": {
+      "author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}
