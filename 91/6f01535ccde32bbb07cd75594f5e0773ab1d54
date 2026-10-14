@@ -1,0 +1,30 @@
+apps/desktop/src/renderer/src/pages/issue-detail-page.tsx
+  h_e18e2c7a96869f 21
+packages/views/issues/components/issue-detail-route.tsx
+  h_e18e2c7a96869f 3,77
+packages/views/issues/components/issue-detail.tsx
+  h_e18e2c7a96869f 1154
+packages/views/issues/components/issue-file-changes.tsx
+  h_e18e2c7a96869f 2,4,19-20
+server/migrations/538_drop_issue_work_chat_session_index.down.sql
+  h_e18e2c7a96869f 1-3
+server/migrations/538_drop_issue_work_chat_session_index.up.sql
+  h_e18e2c7a96869f 1
+server/migrations/539_drop_issue_work_chat_session_column.down.sql
+  h_e18e2c7a96869f 1
+server/migrations/539_drop_issue_work_chat_session_column.up.sql
+  h_e18e2c7a96869f 1
+server/pkg/db/generated/chat.sql.go
+  h_e18e2c7a96869f 327,881,911,1116,1191,1428,1473,1695,2282,2612,2663,2861,3283,3404,3445,3672,3742,3778
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "916f01535ccde32bbb07cd75594f5e0773ab1d54",
+  "prompts": {},
+  "humans": {
+    "h_e18e2c7a96869f": {
+      "author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}
