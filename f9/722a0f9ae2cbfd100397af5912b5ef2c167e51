@@ -1,0 +1,24 @@
+packages/views/chat/components/file-changes-summary.tsx
+  h_e18e2c7a96869f 24,56,93-99,111,114,121
+packages/views/chat/index.ts
+  h_e18e2c7a96869f 5
+packages/views/issues/components/index.ts
+  h_e18e2c7a96869f 15
+packages/views/issues/components/issue-detail.tsx
+  h_e18e2c7a96869f 106,3381-3382
+packages/views/issues/components/issue-file-changes.test.tsx
+  h_e18e2c7a96869f 1-169
+packages/views/issues/components/issue-file-changes.tsx
+  h_e18e2c7a96869f 1-90
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f9722a0f9ae2cbfd100397af5912b5ef2c167e51",
+  "prompts": {},
+  "humans": {
+    "h_e18e2c7a96869f": {
+      "author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}
