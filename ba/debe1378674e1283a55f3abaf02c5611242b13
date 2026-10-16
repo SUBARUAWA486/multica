@@ -1,0 +1,14 @@
+apps/desktop/src/renderer/src/pages/issue-detail-page.tsx
+  h_e18e2c7a96869f 21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "badebe1378674e1283a55f3abaf02c5611242b13",
+  "prompts": {},
+  "humans": {
+    "h_e18e2c7a96869f": {
+      "author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}
