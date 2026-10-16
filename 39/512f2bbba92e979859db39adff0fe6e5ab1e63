@@ -1,0 +1,16 @@
+Dockerfile.web
+  h_e18e2c7a96869f 48,51
+Dockerfile.x86
+  h_e18e2c7a96869f 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "39512f2bbba92e979859db39adff0fe6e5ab1e63",
+  "prompts": {},
+  "humans": {
+    "h_e18e2c7a96869f": {
+      "author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}
