@@ -1,0 +1,18 @@
+apps/desktop/.env.staging
+  h_e18e2c7a96869f 4
+apps/desktop/scripts/build-multica001-dmg.sh
+  h_e18e2c7a96869f 19,21-23,25
+apps/desktop/scripts/bundle-cli.mjs
+  h_e18e2c7a96869f 106
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2c0050b7246151a3d8fc09bd310e9debb7ac25b8",
+  "prompts": {},
+  "humans": {
+    "h_e18e2c7a96869f": {
+      "author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}
