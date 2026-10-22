@@ -1,0 +1,33 @@
+apps/desktop/scripts/bundle-cli.mjs
+  h_e18e2c7a96869f 106
+packages/views/issues/components/comment-card.tsx
+  h_e18e2c7a96869f 6,626
+server/internal/daemon/daemon.go
+  h_e18e2c7a96869f 8242,8792-8797,9611-9613,9655-9657
+apps/desktop/.env.staging
+  h_e18e2c7a96869f 4
+server/internal/daemon/repo_diff.go
+  h_e18e2c7a96869f 10,22-43,48-51,53,57-59,61-97,101-117,130-131,135-143,145-149,153-154,157-284,287,294-300,304-306,308-310,320-325,328,330-343,346,461-466,468,471-472,478-481,485
+packages/views/issues/components/issue-file-changes.tsx
+  h_e18e2c7a96869f 1,5,8,19-25,29-32,36-51,66
+packages/views/issues/components/issue-file-changes.test.tsx
+  h_e18e2c7a96869f 10-11,195-447
+packages/views/common/task-transcript/trace-event-presenter.ts
+  h_e18e2c7a96869f 436
+packages/views/common/task-transcript/build-steps.ts
+  h_e18e2c7a96869f 102-109
+packages/views/chat/index.ts
+  h_e18e2c7a96869f 5-11
+server/internal/daemon/repo_diff_test.go
+  h_e18e2c7a96869f 71-136,143-193
+packages/views/issues/components/inline-comment-run.tsx
+  h_e18e2c7a96869f 27,110,234
+packages/views/chat/components/file-changes-summary.tsx
+  h_e18e2c7a96869f 15,108-116,122-125,165-173,180,183-185,193-196,226-230,250-260,269-270,273-279,284-285
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "87cf8441d315b1c72f6cfe461de3a8db7b4f54a0",
+  "prompts": {}
+}
