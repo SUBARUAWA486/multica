@@ -623,6 +623,7 @@ async function getCliBinaryVersion(): Promise<string | null> {
 async function ensureRunningDaemonVersionMatches(): Promise<
   "restarted" | "deferred" | "ok" | "not_running"
 > {
+  if (quitting || autoStartSuppressedAfterQuit) return "deferred";
   const active = await ensureActiveProfile();
   if (!active) return "not_running";
   const running = await fetchProfileHealth(active);
@@ -636,7 +637,11 @@ async function ensureRunningDaemonVersionMatches(): Promise<
   }
 
   const bundled = await getCliBinaryVersion();
-  if (desiredRunningBeforeUpdateStop !== null) {
+  if (
+    quitting ||
+    autoStartSuppressedAfterQuit ||
+    desiredRunningBeforeUpdateStop !== null
+  ) {
     pendingVersionRestart = true;
     return "deferred";
   }

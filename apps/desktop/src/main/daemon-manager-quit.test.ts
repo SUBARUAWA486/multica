@@ -336,4 +336,19 @@ describe("desktop quit uses the CLI lifecycle", () => {
     expect(context.exec.mock.calls.filter(([, args]) => args[1] === "start")).toHaveLength(1);
   });
 
+  it("does not perform a deferred version restart after cancelling a failed quit", async () => {
+    context.autoStart = true;
+    context.health.mockResolvedValue({ status: "running", active_task_count: 1, cli_version: "old" });
+    context.dialog.mockResolvedValueOnce({ response: 1 }).mockResolvedValueOnce({ response: 0 });
+    await setup();
+    await context.handlers.get("daemon:auto-start")!({});
+    requestQuit();
+    await vi.waitFor(() => expect(context.finishStop).toBeTypeOf("function"));
+    context.finishStop!(new Error("OS refused termination"));
+    await vi.waitFor(() => expect(context.emit).toHaveBeenCalledWith("activate"));
+    context.exec.mockClear();
+    context.health.mockResolvedValue({ status: "running", active_task_count: 0, cli_version: "old" });
+    await vi.advanceTimersByTimeAsync(5_000);
+    expect(context.exec.mock.calls.filter(([, args]) => args[1] === "stop" || args[1] === "start")).toHaveLength(0);
+  });
 });
