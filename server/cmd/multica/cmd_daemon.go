@@ -112,6 +112,7 @@ func init() {
 	f.Bool("no-auto-update", false, "Disable periodic CLI self-update (env: MULTICA_DAEMON_AUTO_UPDATE=false)")
 	f.Duration("auto-update-interval", 0, "How often to poll GitHub for a newer release (env: MULTICA_DAEMON_AUTO_UPDATE_INTERVAL)")
 	f.Bool("no-auto-reload", false, "Disable restarting when the multica binary on disk changes version (env: MULTICA_DAEMON_AUTO_RELOAD=false)")
+	daemonStopCmd.Flags().Bool("force", false, "Wait for graceful shutdown, then force termination if needed")
 
 	daemonLogsCmd.Flags().BoolP("follow", "f", false, "Follow log output")
 	daemonLogsCmd.Flags().IntP("lines", "n", 50, "Number of lines to show")
@@ -1359,6 +1360,13 @@ func runDaemonStop(cmd *cobra.Command, _ []string) error {
 	defer cancel()
 
 	health := checkDaemonHealthOnPort(ctx, healthPort)
+	if force, _ := cmd.Flags().GetBool("force"); force {
+		if err := stopDaemonAndWait(profile, healthPort, health, daemonShutdownLockWait, 2*time.Second); err != nil {
+			return err
+		}
+		fmt.Fprintln(os.Stderr, "Daemon stopped.")
+		return nil
+	}
 	if !daemonAlive(health) {
 		label := "Daemon"
 		if profile != "" {
