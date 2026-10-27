@@ -6,7 +6,7 @@ const context = vi.hoisted(() => ({
   beforeQuit: null as null | ((event: { preventDefault: () => void }) => void),
   quit: vi.fn(), emit: vi.fn(), dialog: vi.fn(), exec: vi.fn(), health: vi.fn(), readPort: vi.fn(), exists: vi.fn(), install: vi.fn(),
   pid: null as number | null,
-  autoStop: true, locale: "en", holdStart: false,
+  autoStart: false, autoStop: true, locale: "en", holdStart: false,
   windows: [] as Array<{
     isDestroyed: () => boolean; isVisible: () => boolean;
     hide: () => void; show: () => void;
@@ -37,7 +37,7 @@ vi.mock("fs/promises", async (original) => ({
       throw Object.assign(new Error("No PID file"), { code: "ENOENT" });
     }
     return path.endsWith("desktop_prefs.json")
-      ? JSON.stringify({ autoStart: false, autoStop: context.autoStop })
+      ? JSON.stringify({ autoStart: context.autoStart, autoStop: context.autoStop })
       : JSON.stringify({ server_url: "https://example.test" });
   }),
   writeFile: vi.fn(), mkdir: vi.fn(),
@@ -80,7 +80,7 @@ function addWindow(initiallyVisible = true) {
 describe("desktop quit uses the CLI lifecycle", () => {
   beforeEach(() => {
     vi.resetModules(); vi.clearAllMocks(); vi.useFakeTimers(); context.handlers.clear();
-    context.autoStop = true; context.locale = "en"; context.holdStart = false;
+    context.autoStart = false; context.autoStop = true; context.locale = "en"; context.holdStart = false;
     context.windows = [];
     context.pid = null; context.readPort.mockResolvedValue(null);
     context.exists.mockReturnValue(true); context.install.mockReset();
@@ -304,4 +304,36 @@ describe("desktop quit uses the CLI lifecycle", () => {
     expect(context.exec).not.toHaveBeenCalled();
     expect(context.quit).not.toHaveBeenCalled();
   });
+  it("keeps auto-start suppressed when cancelling a failed quit recreates the renderer", async () => {
+    context.autoStart = true;
+    context.dialog.mockResolvedValueOnce({ response: 1 }).mockResolvedValueOnce({ response: 0 });
+    await setup(); requestQuit();
+    await vi.waitFor(() => expect(context.finishStop).toBeTypeOf("function"));
+    context.health.mockResolvedValue(null);
+    context.finishStop!(new Error("task cleanup could not be confirmed"));
+    await vi.waitFor(() => expect(context.emit).toHaveBeenCalledWith("activate"));
+    // A recreated renderer calls auto-start again through syncDaemonOnLogin.
+    await context.handlers.get("daemon:auto-start")!({});
+    await vi.advanceTimersByTimeAsync(60_000);
+    expect(context.exec.mock.calls.filter(([, args]) => args[1] === "start")).toHaveLength(0);
+    expect(await context.handlers.get("daemon:get-prefs")!({})).toMatchObject({ autoStart: true });
+    expect(context.quit).not.toHaveBeenCalled();
+
+    await context.handlers.get("daemon:start")!({});
+    expect(context.exec.mock.calls.filter(([, args]) => args[1] === "start")).toHaveLength(1);
+    context.exec.mockClear();
+    await context.handlers.get("daemon:auto-start")!({});
+    expect(context.exec.mock.calls.filter(([, args]) => args[1] === "start")).toHaveLength(1);
+  });
+
+  it("still allows auto-start after cancelling the initial interruption warning", async () => {
+    context.autoStart = true;
+    context.dialog.mockResolvedValue({ response: 0 });
+    await setup(); requestQuit();
+    await vi.waitFor(() => expect(context.emit).toHaveBeenCalledWith("activate"));
+    context.health.mockResolvedValue(null);
+    await context.handlers.get("daemon:auto-start")!({});
+    expect(context.exec.mock.calls.filter(([, args]) => args[1] === "start")).toHaveLength(1);
+  });
+
 });

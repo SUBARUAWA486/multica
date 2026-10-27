@@ -109,6 +109,9 @@ let desiredDaemonRunning = false;
 let desiredRunningBeforeUpdateStop: boolean | null = null;
 const UPDATE_IN_PROGRESS = { success: false, error: "An update is being installed. Try again shortly." };
 let quitting = false;
+// Renderer recreation must not undo a failed-quit cancellation. Keep this
+// process-local until an explicit start/restart, without changing preferences.
+let autoStartSuppressedAfterQuit = false;
 // Once a foreign-OS daemon (for example WSL2) is observed on this profile, do
 // not replace it with a native daemon if its forwarded health endpoint drops.
 let externalDaemonObserved = false;
@@ -322,6 +325,7 @@ function invalidateActiveProfile(): void {
 
 function setDesiredDaemonRunning(desired: boolean, explicit = false): void {
   if (desired && desiredRunningBeforeUpdateStop !== null) return;
+  if (desired && explicit) autoStartSuppressedAfterQuit = false;
   if (desiredDaemonRunning === desired && !explicit) return;
   desiredDaemonRunning = desired;
   recoveryPolicy.reset();
@@ -1512,14 +1516,17 @@ export function setupDaemonManager(
   );
   ipcMain.handle("daemon:auto-start", async () => {
     const prefs = await loadPrefs();
+    if (quitting || autoStartSuppressedAfterQuit) return;
     setDesiredDaemonRunning(prefs.autoStart);
     if (!prefs.autoStart) return;
     // Login auto-start is emitted once per session. Queue it behind bootstrap
     // instead of dropping it like a retryable poll operation.
     await lifecycleOperations.runForeground(async () => {
+      if (quitting || autoStartSuppressedAfterQuit) return;
       const bin = await resolveCliBinary();
       if (!bin) return;
       const health = await fetchHealth();
+      if (quitting || autoStartSuppressedAfterQuit) return;
       observeDaemonBoundary(health);
       if (health.state === "running") {
         // Daemon is up but may be running an older CLI than the one we just
@@ -1590,6 +1597,7 @@ export function setupDaemonManager(
     },
     resume: (restoreDesired) => {
       restoreQuitWindows();
+      if (!restoreDesired) autoStartSuppressedAfterQuit = true;
       quitting = false;
       setDesiredDaemonRunning(restoreDesired && desiredBeforeQuit);
       startPolling();
