@@ -25,6 +25,7 @@ import { daemonStatusAlive } from "../shared/daemon-types";
 import { ensureManagedCli, managedCliPath } from "./cli-bootstrap";
 import { decideVersionAction } from "./version-decision";
 import { createDaemonQuitHandler } from "./daemon-quit";
+import { quitConfirmationOptions, quitFailureOptions } from "./daemon-quit-dialogs";
 import {
   prepareDaemonForInstall,
   type DaemonInstallPrep,
@@ -1142,6 +1143,12 @@ async function daemonPidIsConfirmedAbsent(profile: string): Promise<boolean> {
   }
 }
 
+async function daemonProcessIsConfirmedAbsent(profile: string): Promise<boolean> {
+  const record = await readDaemonPortRecord(profile);
+  return await daemonPidIsConfirmedAbsent(profile)
+    && !(record && daemonProcessExists(record.pid));
+}
+
 async function attemptDaemonRecovery(active: ActiveProfile): Promise<void> {
   const startAllowed = () =>
     recoveryStartAllowed({
@@ -1554,10 +1561,24 @@ export function setupDaemonManager(
   void lifecycleOperations.runBackground(() => bootstrapCli());
 
   let desiredBeforeQuit = false;
-  const chinese = app.getPreferredSystemLanguages()[0]?.startsWith("zh");
+  const language = app.getPreferredSystemLanguages()[0] ?? "en";
+  let hiddenQuitWindows: BrowserWindow[] = [];
+  const hideQuitWindows = () => {
+    hiddenQuitWindows = BrowserWindow.getAllWindows().filter((window) =>
+      !window.isDestroyed() && window.isVisible(),
+    );
+    for (const window of hiddenQuitWindows) window.hide();
+  };
+  const restoreQuitWindows = () => {
+    for (const window of hiddenQuitWindows) {
+      if (!window.isDestroyed()) window.show();
+    }
+    hiddenQuitWindows = [];
+  };
   const show = (options: MessageBoxOptions) => {
     const window = getMainWindow();
-    return window && !window.isDestroyed() ? dialog.showMessageBox(window, options) : dialog.showMessageBox(options);
+    return window && !window.isDestroyed() && window.isVisible()
+      ? dialog.showMessageBox(window, options) : dialog.showMessageBox(options);
   };
   const handleQuit = createDaemonQuitHandler({
     loadPrefs,
@@ -1568,6 +1589,7 @@ export function setupDaemonManager(
       stopPolling();
     },
     resume: (restoreDesired) => {
+      restoreQuitWindows();
       quitting = false;
       setDesiredDaemonRunning(restoreDesired && desiredBeforeQuit);
       startPolling();
@@ -1579,32 +1601,26 @@ export function setupDaemonManager(
       const health = await fetchProfileHealth(active);
       if (isDaemonExternallyManaged(health?.os, normalizeHostOS(process.platform))) return true;
       const healthy = daemonStatusAlive(health?.status);
-      const processIsConfirmedAbsent = async () => {
-        const record = await readDaemonPortRecord(active.name);
-        return await daemonPidIsConfirmedAbsent(active.name)
-          && !(record && daemonProcessExists(record.pid));
-      };
+      const reportedRuns = health?.active_task_count;
+      const activeRuns = healthy && typeof reportedRuns === "number"
+        && Number.isSafeInteger(reportedRuns) && reportedRuns >= 0 ? reportedRuns : null;
       let busy = healthy
-        ? health?.active_task_count !== 0
+        ? activeRuns !== 0
         : currentState === "running" || currentState === "starting";
       if (!healthy && !busy) {
-        busy = !await processIsConfirmedAbsent();
+        busy = !await daemonProcessIsConfirmedAbsent(active.name);
       }
-      if (busy && (await show({
-        type: "warning", title: chinese ? "退出 Multica" : "Quit Multica",
-        message: chinese ? "立即停止 Agent 任务并退出？" : "Stop Agent tasks now and quit?",
-        detail: chinese ? "本机仍有任务运行，或无法确认任务状态。停止守护进程会中断这些任务。" : "Tasks are running on this device, or their status could not be confirmed. Stopping the daemon will interrupt them.",
-        buttons: chinese ? ["取消", "立即停止并退出"] : ["Cancel", "Stop now and quit"],
-        defaultId: 0, cancelId: 0, noLink: true,
-      })).response !== 1) return false;
+      if (busy && (await show(quitConfirmationOptions(language, activeRuns))).response !== 1) return false;
       // Reuse the lifecycle queue: an earlier start must finish before stop.
       // Do not queue behind an unresolved CLI installation during quit.
       if (!cachedCliBinary) {
-        if (!healthy && await processIsConfirmedAbsent()) return true;
+        if (!healthy && await daemonProcessIsConfirmedAbsent(active.name)) return true;
         throw new Error("Multica CLI is not available");
       }
       const window = getMainWindow();
       window?.setProgressBar(2);
+      // Make the accepted quit visible even while a prior start or cleanup drains.
+      hideQuitWindows();
       try {
         const result = await lifecycleOperations.runForeground(() => stopDaemon({ force: true }));
         if (!result.success) throw new Error(result.error ?? "Could not stop the daemon");
@@ -1615,13 +1631,12 @@ export function setupDaemonManager(
     },
     confirmIgnore: async (error) => {
       console.warn("[daemon] could not stop on quit:", error);
-      return (await show({
-        type: "warning", title: chinese ? "无法确认停止完成" : "Could not confirm shutdown",
-        message: chinese ? "仍无法确认守护进程及其任务已全部停止。" : "The daemon and its tasks could not all be confirmed stopped.",
-        detail: chinese ? "忽略并退出后，后台任务可能继续运行。" : "Background tasks may continue running if you ignore this and quit.",
-        buttons: chinese ? ["取消退出", "忽略并退出"] : ["Cancel quit", "Ignore and quit"],
-        defaultId: 0, cancelId: 0, noLink: true,
-      })).response === 1;
+      restoreQuitWindows();
+      const active = await ensureActiveProfile();
+      const health = active ? await fetchProfileHealth(active) : null;
+      const daemonStopped = Boolean(active && !daemonStatusAlive(health?.status)
+        && await daemonProcessIsConfirmedAbsent(active.name));
+      return (await show(quitFailureOptions(language, daemonStopped))).response === 1;
     },
     quit: () => { stopLogTail(); app.quit(); },
   });
