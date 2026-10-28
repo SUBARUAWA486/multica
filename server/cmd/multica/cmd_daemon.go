@@ -1119,6 +1119,9 @@ func runDaemonForeground(cmd *cobra.Command) error {
 	if daemonAlive(existing) && daemonIdentityMismatch(existing, profile, port) == nil {
 		return fmt.Errorf("daemon %s is already running or starting", describeProfile(profile))
 	}
+	if err := writeDaemonShutdownResult(profile, daemonShutdownResult{PID: os.Getpid()}); err != nil {
+		return fmt.Errorf("initialize daemon shutdown result: %w", err)
+	}
 	healthLn, actualPort, err := bindDaemonHealthPort(cfg.HealthPort, net.Listen)
 	if err != nil {
 		return err
@@ -1142,8 +1145,12 @@ func runDaemonForeground(cmd *cobra.Command) error {
 	}
 	defer os.Remove(daemonPIDPathForProfile(profile))
 
-	if err := d.RunWithHealthListener(ctx, healthLn); err != nil && !errors.Is(err, context.Canceled) {
-		return err
+	runErr := d.RunWithHealthListener(ctx, healthLn)
+	if err := writeDaemonShutdownResult(profile, daemonShutdownResult{PID: os.Getpid(), CleanupConfirmed: d.ShutdownCleanupConfirmed()}); err != nil {
+		return fmt.Errorf("write daemon shutdown result: %w", err)
+	}
+	if runErr != nil && !errors.Is(runErr, context.Canceled) {
+		return runErr
 	}
 
 	// Check if the daemon needs to restart after a CLI update.

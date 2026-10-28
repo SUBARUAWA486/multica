@@ -16,7 +16,7 @@ import (
 
 // The daemon holds this lock through task cleanup and runtime deregistration,
 // after its health listener has closed. Release confirms daemon termination,
-// but after a forced kill it cannot confirm that task processes were cleaned up.
+// but only the shutdown result can confirm that task processes were cleaned up.
 func daemonStopComplete(profile string) (bool, error) {
 	path := filepath.Join(daemonDirForProfile(profile), "daemon.lock")
 	if _, err := os.Stat(path); os.IsNotExist(err) {
@@ -56,8 +56,15 @@ func stopDaemonAndWait(profile string, port int, health map[string]any, grace, k
 		return err
 	}
 	if stopped && !daemonAlive(health) {
-		return nil
+		// No daemon was observed in this call. Preserve the idle no-op, but do
+		// not turn a previous failed cleanup into success on a repeated quit.
+		result, err := readDaemonShutdownResult(profile)
+		if os.IsNotExist(err) {
+			return nil
+		}
+		return confirmDaemonCleanup(profile, result.PID)
 	}
+	pidAtStop := daemonStopPID(profile, health)
 	// Keep the official cancellation path, including Agent process-group cleanup.
 	_ = requestDaemonShutdown(port)
 	if stopped {
@@ -66,7 +73,10 @@ func stopDaemonAndWait(profile string, port int, health map[string]any, grace, k
 	// The endpoint may already be closed while a previous shutdown is cleaning
 	// up. A failed request must not shorten the lock holder's grace period.
 	if stopped, err = waitDaemonStop(profile, grace); err != nil || stopped {
-		return err
+		if err != nil {
+			return err
+		}
+		return confirmDaemonCleanup(profile, pidAtStop)
 	}
 	// A fresh health identity is preferred. If health has closed or wedged,
 	// validate the profile PID file against the OS command before signalling it.
@@ -97,7 +107,7 @@ func stopDaemonAndWait(profile string, port int, health map[string]any, grace, k
 		}
 		if err != nil {
 			if stopped, probeErr := daemonStopComplete(profile); probeErr == nil && stopped {
-				return nil
+				return confirmDaemonCleanup(profile, pidAtStop)
 			}
 			return fmt.Errorf("read daemon PID before forced stop: %w", err)
 		}
@@ -107,7 +117,7 @@ func stopDaemonAndWait(profile string, port int, health map[string]any, grace, k
 		}
 		if err := verifyDaemonStopProcess(pid, profile); err != nil {
 			if stopped, probeErr := daemonStopComplete(profile); probeErr == nil && stopped {
-				return nil
+				return confirmDaemonCleanup(profile, pidAtStop)
 			}
 			return err
 		}
@@ -116,7 +126,10 @@ func stopDaemonAndWait(profile string, port int, health map[string]any, grace, k
 		return fmt.Errorf("invalid daemon PID")
 	}
 	if stopped, err = daemonStopComplete(profile); err != nil || stopped {
-		return err
+		if err != nil {
+			return err
+		}
+		return confirmDaemonCleanup(profile, pidAtStop)
 	}
 	process, err := os.FindProcess(pid)
 	if err != nil {
@@ -125,7 +138,7 @@ func stopDaemonAndWait(profile string, port int, health map[string]any, grace, k
 	defer process.Release()
 	if err := process.Kill(); err != nil {
 		if stopped, probeErr := daemonStopComplete(profile); probeErr == nil && stopped {
-			return nil
+			return confirmDaemonCleanup(profile, pidAtStop)
 		}
 		return fmt.Errorf("force stop daemon: %w", err)
 	}

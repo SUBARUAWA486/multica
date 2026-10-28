@@ -48,7 +48,8 @@ func startStopLockHolder(t *testing.T, profile string, daemonName bool) (*exec.C
 	child := exec.Command(executable, "-test.run=^TestDaemonProfileLockHolderProcess$", "daemon", "start", "--foreground", "--profile", profile)
 	child.Env = append(os.Environ(),
 		"MULTICA_TEST_DAEMON_LOCK_PATH="+filepath.Join(daemonDirForProfile(profile), "daemon.lock"),
-		"MULTICA_TEST_DAEMON_LOCK_RELEASE="+release)
+		"MULTICA_TEST_DAEMON_LOCK_RELEASE="+release,
+		"MULTICA_TEST_DAEMON_STOP_RESULT="+daemonShutdownResultPath(profile))
 	stdout, err := child.StdoutPipe()
 	if err != nil {
 		t.Fatal(err)
@@ -197,6 +198,47 @@ func TestDaemonStopForceFlagUsesTheCLIStopPath(t *testing.T) {
 	}
 	if err := child.Wait(); err != nil {
 		t.Fatal(err)
+	}
+}
+
+func TestDaemonStopForceRequiresMatchingCleanupResult(t *testing.T) {
+	for _, outcome := range []string{"confirmed", "unconfirmed", "missing", "malformed", "stale"} {
+		t.Run(outcome, func(t *testing.T) {
+			clearDaemonTaskEnv(t)
+			const profile = "stop-result-test"
+			mkProfiles(t, profile)
+			child, release := startStopLockHolder(t, profile, false)
+			health := map[string]any{"status": "running", "profile": profile, "pid": float64(child.Process.Pid)}
+			_, port := stopTestServer(t, health, func() { _ = os.WriteFile(release, nil, 0o600) })
+			// The child writes these variants before releasing its lock.
+			if err := os.WriteFile(release+".outcome", []byte(outcome), 0o600); err != nil {
+				t.Fatal(err)
+			}
+			err := stopDaemonAndWait(profile, port, health, time.Second, time.Second)
+			if (err == nil) != (outcome == "confirmed") {
+				t.Fatalf("cleanup outcome %s: %v", outcome, err)
+			}
+			if err := child.Wait(); err != nil {
+				t.Fatalf("graceful daemon was killed: %v", err)
+			}
+		})
+	}
+}
+
+func TestDaemonStopForceKeepsFailedCleanupOnRepeatedStop(t *testing.T) {
+	clearDaemonTaskEnv(t)
+	const profile = "stop-repeated-test"
+	mkProfiles(t, profile)
+	if err := stopDaemonAndWait(profile, 0, nil, 0, 0); err != nil {
+		t.Fatalf("idle stop: %v", err)
+	}
+	for _, confirmed := range []bool{false, true} {
+		if err := writeDaemonShutdownResult(profile, daemonShutdownResult{PID: 12345, CleanupConfirmed: confirmed}); err != nil {
+			t.Fatal(err)
+		}
+		if err := stopDaemonAndWait(profile, 0, nil, 0, 0); (err == nil) != confirmed {
+			t.Fatalf("previous cleanup confirmed=%t: %v", confirmed, err)
+		}
 	}
 }
 
