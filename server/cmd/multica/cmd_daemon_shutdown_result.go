@@ -31,6 +31,13 @@ func writeDaemonShutdownResult(profile string, result daemonShutdownResult) erro
 func confirmDaemonCleanup(profile string, pid int) error {
 	result, err := readDaemonShutdownResult(profile)
 	if err != nil || pid <= 1 || result.PID != pid || !result.CleanupConfirmed {
+		// A daemon without a matching result (for example one started by an
+		// older CLI) leaves nothing behind after it exits. Persist the failure so
+		// a repeated stop cannot treat the now-idle profile as cleanly stopped.
+		// The next daemon start overwrites this record with its own PID.
+		if err != nil || result.PID != pid || result.CleanupConfirmed {
+			_ = writeDaemonShutdownResult(profile, daemonShutdownResult{PID: max(pid, 0)})
+		}
 		return fmt.Errorf("daemon exited but task cleanup could not be confirmed; background tasks may still be running")
 	}
 	return nil

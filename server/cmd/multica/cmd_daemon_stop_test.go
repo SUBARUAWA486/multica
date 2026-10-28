@@ -221,6 +221,11 @@ func TestDaemonStopForceRequiresMatchingCleanupResult(t *testing.T) {
 			if err := child.Wait(); err != nil {
 				t.Fatalf("graceful daemon was killed: %v", err)
 			}
+			// Cancelling the failure dialog and quitting again must keep the
+			// failure, even when the daemon left no usable result behind.
+			if err := stopDaemonAndWait(profile, 0, nil, 0, 0); (err == nil) != (outcome == "confirmed") {
+				t.Fatalf("repeated stop after cleanup outcome %s: %v", outcome, err)
+			}
 		})
 	}
 }

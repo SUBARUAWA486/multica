@@ -83,4 +83,9 @@ func TestDaemonStopForceRejectsGracefulExitWithSurvivingRun(t *testing.T) {
 	if stopErr == nil {
 		t.Fatal("stop returned success after daemon exited normally, but its independent run process is still alive")
 	}
+	// Cancelling the failure dialog and quitting again must not erase the
+	// uncertainty while the same independent run process is still alive.
+	if retryErr := stopDaemonAndWait(profile, 0, nil, 0, 0); retryErr == nil {
+		t.Fatal("repeated stop returned success without cleanup confirmation while the independent run process is still alive")
+	}
 }
