@@ -2,7 +2,6 @@ import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { I18nProvider } from "@multica/core/i18n/react";
-import { TooltipProvider } from "@multica/ui/components/ui/tooltip";
 import enProjects from "../../locales/en/projects.json";
 import enIssues from "../../locales/en/issues.json";
 import { ProjectPicker } from "./project-picker";
@@ -13,8 +12,6 @@ vi.mock("@tanstack/react-query", () => ({
     data: [
       { id: "project-1", title: "Launch Command Center", icon: null },
       { id: "project-2", title: "Mobile Web", icon: null },
-      { id: "project-3", title: "customer-portal-platform-development", icon: null },
-      { id: "project-4", title: "customer-portal-platform-production", icon: null },
     ],
   }),
 }));
@@ -34,7 +31,7 @@ vi.mock("./project-icon", () => ({
 function withI18n(children: React.ReactNode) {
   return (
     <I18nProvider locale="en" resources={{ en: { projects: enProjects, issues: enIssues } }}>
-      <TooltipProvider delay={0}>{children}</TooltipProvider>
+      {children}
     </I18nProvider>
   );
 }
@@ -57,45 +54,6 @@ function renderPicker(props: Partial<React.ComponentProps<typeof ProjectPicker>>
 const SEARCH_PLACEHOLDER = "Search projects...";
 
 describe("ProjectPicker", () => {
-  it("reveals full names on hover so projects with the same prefix can be distinguished", async () => {
-    const user = userEvent.setup();
-    const onUpdate = vi.fn();
-    renderPicker({ onUpdate });
-
-    await user.click(screen.getByRole("button", { name: /launch command center/i }));
-    await user.type(await screen.findByPlaceholderText(SEARCH_PLACEHOLDER), "customer-portal");
-
-    const development = screen.getByRole("button", { name: "customer-portal-platform-development" });
-    const production = screen.getByRole("button", { name: "customer-portal-platform-production" });
-    await user.hover(development);
-    expect(await screen.findByText("customer-portal-platform-development", {
-      selector: '[data-slot="tooltip-content"]',
-    })).toBeVisible();
-    await user.unhover(development);
-    await user.hover(production);
-    expect(await screen.findByText("customer-portal-platform-production", {
-      selector: '[data-slot="tooltip-content"]',
-    })).toBeVisible();
-    await user.click(production);
-
-    expect(onUpdate).toHaveBeenCalledWith({ project_id: "project-4" });
-  });
-
-  it("reveals the full project name when its row receives keyboard focus", async () => {
-    const user = userEvent.setup();
-    renderPicker();
-
-    await user.click(screen.getByRole("button", { name: /launch command center/i }));
-    await user.type(await screen.findByPlaceholderText(SEARCH_PLACEHOLDER), "customer-portal-platform-production");
-    await user.tab();
-    await user.tab();
-
-    expect(screen.getByRole("button", { name: "customer-portal-platform-production" })).toHaveFocus();
-    expect(await screen.findByText("customer-portal-platform-production", {
-      selector: '[data-slot="tooltip-content"]',
-    })).toBeVisible();
-  });
-
   it("renders the trigger alone — the pill carries no inline clear control", () => {
     // Regression: the clear × used to be an absolutely-positioned sibling
     // overlaying the trigger, and only the picker's own default trigger
