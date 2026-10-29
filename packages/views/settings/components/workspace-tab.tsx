@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Copy } from "lucide-react";
+import { Copy } from "@multica/ui/icons";
 import { Switch } from "@multica/ui/components/ui/switch";
 import { Input } from "@multica/ui/components/ui/input";
 import { Textarea } from "@multica/ui/components/ui/textarea";
