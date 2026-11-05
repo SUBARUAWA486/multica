@@ -1,0 +1,42 @@
+packages/views/chat/components/chat-message-list.tsx
+  h_e18e2c7a96869f 54,638
+packages/views/chat/components/file-changes-summary.tsx
+  h_e18e2c7a96869f 1-236
+packages/views/chat/index.ts
+  h_e18e2c7a96869f 3-4
+packages/views/common/task-transcript/detail-surfaces.tsx
+  h_e18e2c7a96869f 174-183,185
+packages/views/issues/components/comment-card.tsx
+  h_e18e2c7a96869f 3-6,631-636,925-929,1467-1471
+packages/views/issues/components/index.ts
+  h_e18e2c7a96869f 13-14
+packages/views/issues/components/inline-comment-run.tsx
+  h_e18e2c7a96869f 26,232
+packages/views/issues/components/issue-detail.tsx
+  h_e18e2c7a96869f 97,3771-3772
+packages/views/issues/components/issue-file-changes.test.tsx
+  h_e18e2c7a96869f 1-193
+packages/views/issues/components/issue-file-changes.tsx
+  h_e18e2c7a96869f 1-45
+packages/views/locales/en/chat.json
+  h_e18e2c7a96869f 90-98
+packages/views/locales/fr/chat.json
+  h_e18e2c7a96869f 90-98
+packages/views/locales/ja/chat.json
+  h_e18e2c7a96869f 86-93
+packages/views/locales/ko/chat.json
+  h_e18e2c7a96869f 86-93
+packages/views/locales/zh-Hans/chat.json
+  h_e18e2c7a96869f 86-93
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "062d2454610566fa853c85e477a6e11062f553e5",
+  "prompts": {},
+  "humans": {
+    "h_e18e2c7a96869f": {
+      "author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}

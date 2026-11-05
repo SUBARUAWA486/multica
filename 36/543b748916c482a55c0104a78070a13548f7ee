@@ -1,0 +1,21 @@
+Dockerfile.x86
+  s_2e90d1068c3b4b::t_c8cd070a3909a7 3
+  s_2e90d1068c3b4b::t_1f15ce194ca9bd 1,7,9-10,35-38
+  s_2e90d1068c3b4b::t_b32db043382543 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "36543b748916c482a55c0104a78070a13548f7ee",
+  "prompts": {},
+  "sessions": {
+    "s_2e90d1068c3b4b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12ee7-a050-7600-991a-bccf26bb5d56",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "chenqiangjun <manlu@dtstack.com>"
+    }
+  }
+}

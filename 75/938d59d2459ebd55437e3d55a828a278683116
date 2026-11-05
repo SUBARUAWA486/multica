@@ -1,0 +1,16 @@
+packages/views/chat/components/file-changes-summary.tsx
+  h_e18e2c7a96869f 100-122,127,136
+packages/views/issues/components/issue-file-changes.test.tsx
+  h_e18e2c7a96869f 107,111-114,124-126
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "75938d59d2459ebd55437e3d55a828a278683116",
+  "prompts": {},
+  "humans": {
+    "h_e18e2c7a96869f": {
+      "author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}

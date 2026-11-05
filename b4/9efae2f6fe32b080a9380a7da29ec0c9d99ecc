@@ -1,0 +1,29 @@
+packages/views/issues/components/comment-card.tsx
+  h_e18e2c7a96869f 3-6,623-628,915-919
+packages/views/chat/components/file-changes-summary.tsx
+  h_e18e2c7a96869f 24,56,77-83,100-131,135-138,146,149,156
+apps/desktop/.env.staging
+  h_a1f47354e65325 4,11
+Dockerfile.web
+  h_e18e2c7a96869f 51,54
+packages/views/issues/components/index.ts
+  h_e18e2c7a96869f 13
+packages/views/issues/components/issue-detail.tsx
+  h_e18e2c7a96869f 115,3760-3761
+Dockerfile.x86
+  h_a1f47354e65325 4,11-24,31-32,34,39-55
+server/internal/daemon/health.go
+  h_e18e2c7a96869f 127-132,554-556
+packages/views/issues/components/inline-comment-run.tsx
+  h_e18e2c7a96869f 26,232
+server/internal/daemon/daemon.go
+  h_e18e2c7a96869f 8211-8215,8305-8308,8733-8738
+packages/views/chat/index.ts
+  h_e18e2c7a96869f 5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "b49efae2f6fe32b080a9380a7da29ec0c9d99ecc",
+  "prompts": {}
+}

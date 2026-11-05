@@ -1,0 +1,19 @@
+packages/views/issues/components/issue-detail.tsx
+  s_6a1b7ecdaae4d7::t_50eeeeb5480c30 1308
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1d8d2cb9fee44404045157a41676974b3160427b",
+  "prompts": {},
+  "sessions": {
+    "s_6a1b7ecdaae4d7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12ef2-41da-7441-a7ac-0cbed261885f",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "chenqiangjun <manlu@dtstack.com>"
+    }
+  }
+}

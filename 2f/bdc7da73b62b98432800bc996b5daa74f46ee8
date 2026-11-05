@@ -1,0 +1,32 @@
+packages/views/chat/components/file-changes-summary.tsx
+  h_e18e2c7a96869f 75-82,85-88,118-122,124,126-134
+packages/views/chat/index.ts
+  h_e18e2c7a96869f 5-11
+packages/views/common/task-transcript/build-steps.ts
+  h_e18e2c7a96869f 102-109
+packages/views/issues/components/comment-card.tsx
+  h_e18e2c7a96869f 6,625
+packages/views/issues/components/inline-comment-run.tsx
+  h_e18e2c7a96869f 26,109,233
+packages/views/issues/components/issue-file-changes.test.tsx
+  h_e18e2c7a96869f 193-384
+packages/views/issues/components/issue-file-changes.tsx
+  h_e18e2c7a96869f 1,5,8,19-25,29-32,36-51,56
+server/internal/daemon/daemon.go
+  h_e18e2c7a96869f 8212,8755-8760,9565-9567,9609-9611
+server/internal/daemon/repo_diff.go
+  h_e18e2c7a96869f 10,22-43,48-50,54-91,95-107,126-209,292-297,299,302
+server/internal/daemon/repo_diff_test.go
+  h_e18e2c7a96869f 67-134
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2fbdc7da73b62b98432800bc996b5daa74f46ee8",
+  "prompts": {},
+  "humans": {
+    "h_e18e2c7a96869f": {
+      "author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}

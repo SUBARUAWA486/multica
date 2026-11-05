@@ -1,0 +1,74 @@
+server/internal/daemon/repo_diff_test.go
+  s_c2198a3ae6dcab::t_535e3850490b12 38,137-142,216,228,231,236
+  s_c2198a3ae6dcab::t_0c68c5a1d30215 36-37
+  s_c2198a3ae6dcab::t_a0deb2f5ffdf09 39-40
+  s_c2198a3ae6dcab::t_aad2658aa177fb 213-215
+  s_c2198a3ae6dcab::t_dea3d695aefa1b 217-219,225-227
+  s_c2198a3ae6dcab::t_6c7c40b0c91dc4 229-230
+  s_c2198a3ae6dcab::t_17941b57fcb088 232-235
+  s_c2198a3ae6dcab::t_0c0d4c85b4cc7f 237-238
+  s_c2198a3ae6dcab::t_a8298f35b28e25 7,194-212,220-224
+packages/views/chat/components/file-changes-summary.tsx
+  s_c2198a3ae6dcab::t_434516608f6bab 55,60,104,237,242-249
+  s_c2198a3ae6dcab::t_71dc410a8befec 232-235,238-241
+  s_c2198a3ae6dcab::t_5d0abb69f7fa49 52-54
+  s_c2198a3ae6dcab::t_7c8594254419bd 56-59
+  s_c2198a3ae6dcab::t_350980775d0f17 61-63,101-103
+  s_c2198a3ae6dcab::t_4da4ed4b915753 105-107
+  s_c2198a3ae6dcab::t_06b5e4b93704ed 64-100,129-160,174-179,186-191,210,354-356
+packages/views/issues/components/issue-file-changes.tsx
+  s_c2198a3ae6dcab::t_71dc410a8befec 56
+server/internal/daemon/repo_diff.go
+  s_c2198a3ae6dcab::t_434516608f6bab 152,291,318,349-366,404-460,482-484
+  s_c2198a3ae6dcab::t_b3b5dffe717581 150-151
+  s_c2198a3ae6dcab::t_dd644838da144b 288-290
+  s_c2198a3ae6dcab::t_0791c3de7fff6f 315-317
+  s_c2198a3ae6dcab::t_44388971b8e368 319
+  s_c2198a3ae6dcab::t_9d5d765976b64f 52,60,144,311-314
+packages/views/chat/components/file-changes-summary.test.tsx
+  s_c2198a3ae6dcab::t_535e3850490b12 18,70,206,208-248,275-276,326
+  s_c2198a3ae6dcab::t_434516608f6bab 13
+  s_c2198a3ae6dcab::t_1a7c23049cc80f 34,41,59,69,89,104,109,123,134,139,152,166,171,182,189,197,205,249-274,286,293,298,316,325
+  s_c2198a3ae6dcab::t_509cb981105354 10-12
+  s_c2198a3ae6dcab::t_29c6d53116ec0c 14-17
+  s_c2198a3ae6dcab::t_9c128c3e6e042f 19-21,31-33
+  s_c2198a3ae6dcab::t_6e20aef91322b2 35-40
+  s_c2198a3ae6dcab::t_dfd804ab165752 42-44,56-58
+  s_c2198a3ae6dcab::t_d96c11e70b2ede 60-62,66-68
+  s_c2198a3ae6dcab::t_9faad76f2031bf 71-73,86-88
+  s_c2198a3ae6dcab::t_e8c1cf011b8272 90-92,101-103
+  s_c2198a3ae6dcab::t_d2badf3859a8ff 105-108
+  s_c2198a3ae6dcab::t_2563c4fda7fc86 110-112,120-122
+  s_c2198a3ae6dcab::t_c24fb5732c246a 124-126,131-133
+  s_c2198a3ae6dcab::t_92fe610ee7ecfe 135-138
+  s_c2198a3ae6dcab::t_a0cc6d306eae15 140-142,149-151
+  s_c2198a3ae6dcab::t_414c37ac5772a7 153-155,163-165
+  s_c2198a3ae6dcab::t_fca18516f3d47f 167-170
+  s_c2198a3ae6dcab::t_2c57f8d36e3fd3 172-174,179-181
+  s_c2198a3ae6dcab::t_3ef3a9273ae082 183-188
+  s_c2198a3ae6dcab::t_953a05aa23d2f1 190-192,194-196
+  s_c2198a3ae6dcab::t_e27770ff0d67b0 198-200,202-204
+  s_c2198a3ae6dcab::t_d41c7d033467f9 207
+  s_c2198a3ae6dcab::t_cf0d621c5559fe 277-279,283-285
+  s_c2198a3ae6dcab::t_60dc8de9c47625 287-292
+  s_c2198a3ae6dcab::t_385b73d45940d5 294-297
+  s_c2198a3ae6dcab::t_6414a53cafbd50 299-301,313-315
+  s_c2198a3ae6dcab::t_f966f0b074752b 317-319,322-324
+  s_c2198a3ae6dcab::t_8f36959b369643 1-9,22-30,45-55,63-65,74-85,93-100,113-119,127-130,143-148,156-162,175-178,193,201,280-282,302-312,320-321
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f07cc441563e37458135ee5c4991a5e71fd3aef4",
+  "prompts": {},
+  "sessions": {
+    "s_c2198a3ae6dcab": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1615d-b978-7760-842b-4a929f7fd477",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+apps/desktop/scripts/build-dtstack-multica-dmg.sh
+  s_84bd0b2c825df6::t_9b3c5b7a1b2498 11
+  s_84bd0b2c825df6::t_a30dd50ae4dae2 3,28,50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7eaef7d4e4f30c0b29e1ff138e5cdffb980a1438",
+  "prompts": {},
+  "sessions": {
+    "s_84bd0b2c825df6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12dff-2714-78b3-9f8e-c50d4baa4d73",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "chenqiangjun <manlu@dtstack.com>"
+    }
+  }
+}

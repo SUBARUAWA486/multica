@@ -1,0 +1,22 @@
+server/pkg/db/generated/chat.sql.go
+  h_e18e2c7a96869f 327,369,510-559,932,957,963,993-1029,1205,1246,1281,1326,1453,1520,1550,1566,1595,1789,1811,1843,1886,2379,2399,2431,2470,2499,2713,2759,2765,2827,2964,2988,3387,3420,3509,3542,3551,3585,3779,3811,3850,3879,3887,3925
+server/pkg/db/generated/issue.sql.go
+  h_e18e2c7a96869f 1587-1634
+server/pkg/db/generated/models.go
+  h_e18e2c7a96869f 544
+server/pkg/db/queries/chat.sql
+  h_e18e2c7a96869f 6-10,27-30,74,112,1481,1505
+server/pkg/db/queries/issue.sql
+  h_e18e2c7a96869f 98-102
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d747348588664a5f71d2b95ad19795f9ec492217",
+  "prompts": {},
+  "humans": {
+    "h_e18e2c7a96869f": {
+      "author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}

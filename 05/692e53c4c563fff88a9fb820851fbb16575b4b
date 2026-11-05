@@ -1,0 +1,14 @@
+packages/views/issues/components/comment-card.tsx
+  h_e18e2c7a96869f 610
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "05692e53c4c563fff88a9fb820851fbb16575b4b",
+  "prompts": {},
+  "humans": {
+    "h_e18e2c7a96869f": {
+      "author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}

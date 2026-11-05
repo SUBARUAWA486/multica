@@ -1,0 +1,105 @@
+server/internal/handler/issue_work_session.go
+  s_deb63e3ee3b4fd::t_e7204b87eb11f0 49-61,139-151,159-167,185-187
+  s_deb63e3ee3b4fd::t_7a28877bb617b0 1-48,62-138,152-158,168-184,188-198
+apps/desktop/src/renderer/src/pages/issue-detail-page.tsx
+  s_deb63e3ee3b4fd::t_d08fa6c10a95a9 4,7,17,25-35,39-41
+  s_deb63e3ee3b4fd::t_b277bf60a7e095 8,36-38
+packages/views/locales/ja/issues.json
+  s_deb63e3ee3b4fd::t_b742cd80d38eb4 461
+  s_deb63e3ee3b4fd::t_2b74c94692492e 468-471
+  s_deb63e3ee3b4fd::t_a4606acf30442b 459-460,462-467,472
+Dockerfile.x86
+  h_a1f47354e65325 2,6-20,27-28,30-48
+  s_deb63e3ee3b4fd::t_2b70007c3f1536 1,3-5,21-26,29
+server/migrations/536_issue_work_chat_session.down.sql
+  s_deb63e3ee3b4fd::t_7a28877bb617b0 1-2
+server/migrations/537_issue_work_chat_session_issue_index.up.sql
+  s_deb63e3ee3b4fd::t_7a28877bb617b0 1-3
+packages/core/api/client.ts
+  s_deb63e3ee3b4fd::t_b96b8d64b0e32c 3553-3572
+server/migrations/537_issue_work_chat_session_issue_index.down.sql
+  s_deb63e3ee3b4fd::t_7a28877bb617b0 1
+packages/views/locales/fr/issues.json
+  s_deb63e3ee3b4fd::t_2b74c94692492e 473-476
+  s_deb63e3ee3b4fd::t_b742cd80d38eb4 466
+  s_deb63e3ee3b4fd::t_a4606acf30442b 464-465,467-472,477
+packages/views/locales/en/issues.json
+  s_deb63e3ee3b4fd::t_b742cd80d38eb4 466
+  s_deb63e3ee3b4fd::t_2b74c94692492e 473-476
+  s_deb63e3ee3b4fd::t_a4606acf30442b 464-465,467-472,477
+packages/views/chat/components/file-changes-summary.tsx
+  s_deb63e3ee3b4fd::t_fa7b167177d2d9 171-175
+  s_deb63e3ee3b4fd::t_da1245a14b94d4 158
+packages/views/locales/zh-Hans/layout.json
+  h_a1f47354e65325 6
+server/pkg/db/queries/issue.sql
+  s_deb63e3ee3b4fd::t_7a28877bb617b0 98-102
+server/pkg/db/queries/chat.sql
+  s_deb63e3ee3b4fd::t_7a28877bb617b0 6,9-10,27-28,74,112,1481,1505
+  s_deb63e3ee3b4fd::t_e7204b87eb11f0 7-8
+  s_deb63e3ee3b4fd::t_811df1a95b3c42 29
+  s_deb63e3ee3b4fd::t_db8f8e945689cb 30
+packages/views/locales/ko/issues.json
+  s_deb63e3ee3b4fd::t_a4606acf30442b 459-460,462-467,472
+  s_deb63e3ee3b4fd::t_b742cd80d38eb4 461
+  s_deb63e3ee3b4fd::t_2b74c94692492e 468-471
+packages/views/issues/components/issue-detail-route.tsx
+  s_deb63e3ee3b4fd::t_b96b8d64b0e32c 3,18-19,101
+  s_deb63e3ee3b4fd::t_b277bf60a7e095 20-21,81,102
+server/migrations/536_issue_work_chat_session.up.sql
+  s_deb63e3ee3b4fd::t_7a28877bb617b0 1-5
+server/pkg/db/generated/chat.sql.go
+  s_deb63e3ee3b4fd::t_843cbccc11eaaa 511-533
+  s_deb63e3ee3b4fd::t_93c2968ab37a2f 327,369,510,534-559,932,957,963,993-1029,1205,1246,1281,1326,1453,1520,1550,1566,1595,1789,1811,1843,1886,2379,2399,2431,2470,2499,2713,2759,2765,2827,2964,2988,3387,3420,3509,3542,3551,3585,3779,3811,3850,3879,3887,3925
+server/cmd/server/router.go
+  s_deb63e3ee3b4fd::t_7a28877bb617b0 1976-1977
+packages/views/chat/index.ts
+  s_deb63e3ee3b4fd::t_b96b8d64b0e32c 3-4
+packages/views/issues/components/issue-detail.tsx
+  s_deb63e3ee3b4fd::t_84bdc46ca1ae1b 3490-3496
+  s_deb63e3ee3b4fd::t_b96b8d64b0e32c 1024-1025,2803
+  s_deb63e3ee3b4fd::t_b277bf60a7e095 1026-1027,1157
+packages/views/locales/zh-Hans/issues.json
+  s_deb63e3ee3b4fd::t_a4606acf30442b 459-460,462-467,472
+  s_deb63e3ee3b4fd::t_2b74c94692492e 468-471
+  s_deb63e3ee3b4fd::t_b742cd80d38eb4 461
+packages/views/common/task-transcript/detail-surfaces.tsx
+  s_deb63e3ee3b4fd::t_fa7b167177d2d9 174-183,185
+server/internal/handler/chat.go
+  s_deb63e3ee3b4fd::t_0417ab68916e18 324-330
+  s_deb63e3ee3b4fd::t_811df1a95b3c42 270-282
+apps/desktop/src/renderer/src/components/issue-work-record-section.tsx
+  s_deb63e3ee3b4fd::t_612b62a056e6cc 1-52,54-78
+  s_deb63e3ee3b4fd::t_84bdc46ca1ae1b 53
+apps/desktop/src/renderer/src/components/issue-work-mode-dialog.tsx
+  s_deb63e3ee3b4fd::t_5fd90d4fda1cf9 13,15,24,41,47,62,64-70
+  s_deb63e3ee3b4fd::t_c5f2af2a0cc324 1-12,14,16-23,25-40,42-46,48-61,63,71-131,133-175,177-180,182-184,188-204
+  s_deb63e3ee3b4fd::t_aa06bce8891cac 132,176,181,185-187
+apps/desktop/.env.staging
+  h_a1f47354e65325 4,11
+server/pkg/db/generated/issue.sql.go
+  s_deb63e3ee3b4fd::t_ee09f7fc0710f7 1587-1634
+server/pkg/db/generated/models.go
+  s_deb63e3ee3b4fd::t_daf4139258a558 544
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "f2b96a4b1c6be12957ef903489bbe3c4b2aa2b28",
+  "prompts": {},
+  "humans": {
+    "h_a1f47354e65325": {
+      "author": "chenqiangjun <manlu@dtstack.com>"
+    }
+  },
+  "sessions": {
+    "s_deb63e3ee3b4fd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0eade-d998-7772-9098-119aa07e0c26",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "chenqiangjun <manlu@dtstack.com>"
+    }
+  }
+}

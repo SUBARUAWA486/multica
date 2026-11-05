@@ -1,0 +1,46 @@
+packages/views/chat/components/chat-message-list.tsx
+  s_deb63e3ee3b4fd::t_34ef019cb7dbe0 54,638
+packages/views/locales/ko/chat.json
+  s_deb63e3ee3b4fd::t_34ef019cb7dbe0 86-89,93
+  s_deb63e3ee3b4fd::t_616038ec259696 90-92
+packages/views/locales/zh-Hans/chat.json
+  s_deb63e3ee3b4fd::t_34ef019cb7dbe0 86-89,93
+  s_deb63e3ee3b4fd::t_616038ec259696 90-92
+packages/views/locales/zh-Hans/layout.json
+  s_deb63e3ee3b4fd::t_cda06f2709df88 6
+packages/views/chat/components/file-changes-summary.tsx
+  s_deb63e3ee3b4fd::t_34ef019cb7dbe0 1-5,13-18,20-27,29-42,44-45,47,49-59,70-78,80,87-95,97-124,131-137,139-156,188-190
+  s_deb63e3ee3b4fd::t_a71185925c9d9e 125-130,138,157,159-187
+  s_deb63e3ee3b4fd::t_2a8ce131e111af 158
+  s_deb63e3ee3b4fd::t_ad0e905c85a7b8 6-12,19,28,43,46,48,60-69,79,81-86,96
+apps/desktop/src/main/index.ts
+  s_deb63e3ee3b4fd::t_64112a7021f550 567-571
+packages/views/locales/en/chat.json
+  s_deb63e3ee3b4fd::t_616038ec259696 95-97
+  s_deb63e3ee3b4fd::t_34ef019cb7dbe0 90-94,98
+packages/views/locales/ja/chat.json
+  s_deb63e3ee3b4fd::t_616038ec259696 90-92
+  s_deb63e3ee3b4fd::t_34ef019cb7dbe0 86-89,93
+packages/views/locales/fr/chat.json
+  s_deb63e3ee3b4fd::t_34ef019cb7dbe0 90-94,98
+  s_deb63e3ee3b4fd::t_616038ec259696 95-97
+apps/desktop/scripts/build-multica001-dmg.sh
+  s_deb63e3ee3b4fd::t_ecc9621fe24b4a 1-24,27,33-42,44-47,59-60
+  s_deb63e3ee3b4fd::t_12388438026af8 25-26,28-32,43,48-58,61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "3eb0b749974fcc25aec6d338a7c4f07f609a450b",
+  "prompts": {},
+  "sessions": {
+    "s_deb63e3ee3b4fd": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0eade-d998-7772-9098-119aa07e0c26",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "chenqiangjun <manlu@dtstack.com>"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+apps/desktop/src/renderer/src/components/issue-work-mode-dialog.tsx
+  h_e18e2c7a96869f 1
+apps/desktop/src/renderer/src/components/issue-work-record-section.tsx
+  h_e18e2c7a96869f 1
+packages/views/chat/index.ts
+  h_e18e2c7a96869f 5
+packages/views/issues/components/comment-card.tsx
+  h_e18e2c7a96869f 3-6,607-612,892-896
+packages/views/issues/components/index.ts
+  h_e18e2c7a96869f 13-14
+packages/views/issues/components/inline-comment-run.tsx
+  h_e18e2c7a96869f 23,187
+packages/views/issues/components/issue-detail-route.tsx
+  h_e18e2c7a96869f 9-10,103-104
+packages/views/issues/components/issue-work-mode-dialog.tsx
+  h_e18e2c7a96869f 1-204
+packages/views/issues/components/issue-work-record-section.tsx
+  h_e18e2c7a96869f 1-77
+server/internal/handler/chat.go
+  h_e18e2c7a96869f 275,279
+server/internal/handler/issue_work_session.go
+  h_e18e2c7a96869f 20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4077f3db50174f4a0c14cbd8629d8728549cdb7a",
+  "prompts": {},
+  "humans": {
+    "h_e18e2c7a96869f": {
+      "author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}

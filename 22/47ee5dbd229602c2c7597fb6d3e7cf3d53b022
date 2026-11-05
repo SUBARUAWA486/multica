@@ -1,0 +1,23 @@
+packages/views/issues/components/inline-comment-run.tsx
+  s_84bd0b2c825df6::t_532b01c3a39aa1 22,128-131,258-259
+  s_84bd0b2c825df6::t_4c16b5e32f887b 61-65,69-85,257
+  s_84bd0b2c825df6::t_f30b633d598d3b 86-87
+packages/views/chat/components/file-changes-summary.tsx
+  s_84bd0b2c825df6::t_532b01c3a39aa1 16,56,93
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2247ee5dbd229602c2c7597fb6d3e7cf3d53b022",
+  "prompts": {},
+  "sessions": {
+    "s_84bd0b2c825df6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12dff-2714-78b3-9f8e-c50d4baa4d73",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "chenqiangjun <manlu@dtstack.com>"
+    }
+  }
+}

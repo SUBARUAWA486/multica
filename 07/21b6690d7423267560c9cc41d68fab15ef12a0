@@ -1,0 +1,24 @@
+packages/views/chat/components/file-changes-summary.tsx
+  h_e18e2c7a96869f 15,52-60,66-69,93-100,154-158,167-168,171-177,182-183
+packages/views/common/task-transcript/trace-event-presenter.ts
+  h_e18e2c7a96869f 436
+packages/views/issues/components/issue-file-changes.test.tsx
+  h_e18e2c7a96869f 10-11,387-447
+packages/views/issues/components/issue-file-changes.tsx
+  h_e18e2c7a96869f 66
+server/internal/daemon/repo_diff.go
+  h_e18e2c7a96869f 48-52,57-60,99-102,128-129,133-148,158,167,171,177,188,192-197,203,205,208,210,225,237-278,281,284-290,294-296,298-306,309,311-324,327,377-380,384-390
+server/internal/daemon/repo_diff_test.go
+  h_e18e2c7a96869f 135-183
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0721b6690d7423267560c9cc41d68fab15ef12a0",
+  "prompts": {},
+  "humans": {
+    "h_e18e2c7a96869f": {
+      "author": "wangqi <wangqi@dtstack.com>"
+    }
+  }
+}
