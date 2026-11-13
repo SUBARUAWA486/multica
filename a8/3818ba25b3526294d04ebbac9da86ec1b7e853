@@ -1,0 +1,17 @@
+server/internal/daemon/health.go
+  h_e18e2c7a96869f 128-129,131-133,611-612
+packages/views/common/task-transcript/trace-event-presenter.ts
+  h_e18e2c7a96869f 441
+packages/views/issues/components/comment-card.tsx
+  h_e18e2c7a96869f 3-4
+packages/views/issues/components/inline-comment-run.tsx
+  h_e18e2c7a96869f 244
+server/internal/daemon/daemon.go
+  h_e18e2c7a96869f 9195-9196,9199-9201
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "a83818ba25b3526294d04ebbac9da86ec1b7e853",
+  "prompts": {}
+}
